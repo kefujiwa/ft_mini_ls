@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 21:04:52 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/03 19:58:34 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/03 20:23:51 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	do_ls(char *path, DIR *dp)
 		flst_add(&head, new);
 	}
 	flst_print(head);
+	flst_clear(&head);
 	return (0);
 }
 
