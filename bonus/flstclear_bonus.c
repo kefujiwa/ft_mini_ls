@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flstnew.c                                          :+:      :+:    :+:   */
+/*   flstclear_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/03 17:01:02 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/04 01:14:54 by kefujiwa         ###   ########.fr       */
+/*   Created: 2020/12/03 16:57:27 by kefujiwa          #+#    #+#             */
+/*   Updated: 2020/12/03 22:35:54 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_mini_ls.h"
+#include "ft_mini_ls_bonus.h"
 
-t_flst	*flst_new(char *name, struct stat *st)
+void	flst_clear(t_flst **lst)
 {
-	t_flst	*lst;
+	t_flst *next_lst;
 
-	lst = (t_flst*)malloc(sizeof(t_flst));
 	if (!lst)
-		return (NULL);
-	lst->name = ft_strdup(name);
-	if (!lst->name)
-		return (NULL);
-	lst->time = st->st_mtime;
-	lst->ntime = st->st_mtimespec.tv_nsec;
-	lst->next = NULL;
-	return (lst);
+		return ;
+	while (*lst)
+	{
+		next_lst = (*lst)->next;
+		free((*lst)->name);
+		free(*lst);
+		*lst = next_lst;
+	}
 }

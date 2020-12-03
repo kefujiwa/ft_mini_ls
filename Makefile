@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2020/12/03 18:24:38 by kefujiwa         ###   ########.fr        #
+#    Updated: 2020/12/03 22:39:11 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,15 @@ SRCS		= ft_mini_ls.c\
 		flstprint.c\
 
 OBJS		= $(SRCS:.c=.o)
+
+BONUSDIR	= ./bonus/
+SRCSb		= $(BONUSDIR)ft_mini_ls_bonus.c\
+		$(BONUSDIR)flstadd_bonus.c\
+		$(BONUSDIR)flstclear_bonus.c\
+		$(BONUSDIR)flstnew_bonus.c\
+		$(BONUSDIR)flstprint_bonus.c\
+
+OBJSb		= $(SRCSb:.c=.o)
 
 LIBFTDIR	= ./libft/
 LIBFTSRCNAME	= $(SRCS)ft_memset.c\
@@ -77,6 +86,9 @@ all:		$(NAME)
 $(NAME):	$(OBJS) $(LIBFTNAME)
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFTNAME)
 
+bonus:		$(OBJSb) $(LIBFTNAME)
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJSb) $(LIBFTNAME)
+
 %.o: %.c
 		$(CC) $(CFLAGS) -c $^ -o $@
 
@@ -85,7 +97,7 @@ $(LIBFTNAME):	FORCE
 
 clean:
 		$(MAKE) clean -C ./libft
-		rm -rf $(OBJS)
+		rm -rf $(OBJS) $(OBJSb)
 
 fclean:		clean
 		$(MAKE) fclean -C ./libft
