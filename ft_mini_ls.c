@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 21:04:52 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/03 21:43:14 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/03 22:16:36 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int	do_ls(char *path, DIR *dp)
 			continue;
 		if (lstat(ent->d_name, &st) < 0)
 			return (die(path));
-		if (!(new = flst_new(ent->d_name, st.st_mtime, st.st_mtimespec.tv_nsec)))
+		if (!(new = flst_new(ent->d_name, st.st_mtime,
+			st.st_mtimespec.tv_nsec)))
 		{
 			flst_clear(&head);
 			return (die(path));
