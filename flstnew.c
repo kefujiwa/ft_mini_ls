@@ -6,13 +6,13 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 17:01:02 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/03 18:37:02 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/03 21:41:54 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_mini_ls.h"
 
-t_flst	*flst_new(char *name, time_t time, ino_t inum)
+t_flst	*flst_new(char *name, time_t time, long ntime)
 {
 	t_flst	*lst;
 
@@ -23,7 +23,7 @@ t_flst	*flst_new(char *name, time_t time, ino_t inum)
 	if (!lst->name)
 		return (NULL);
 	lst->time = time;
-	lst->inum = inum;
+	lst->ntime = ntime;
 	lst->next = NULL;
 	return (lst);
 }

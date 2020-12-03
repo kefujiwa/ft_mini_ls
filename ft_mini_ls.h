@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 19:15:07 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/03 19:50:42 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/03 21:42:25 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ typedef struct		s_flst
 {
 	char			*name;
 	time_t			time;
-	ino_t			inum;
+	long			ntime;
 	struct s_flst	*next;
 }					t_flst;
 
 void				flst_print(t_flst *lst);
 void				flst_add(t_flst **lst, t_flst *new);
-t_flst				*flst_new(char *name, time_t time, ino_t inum);
+t_flst				*flst_new(char *name, time_t time, long ntime);
 void				flst_clear(t_flst **lst);
 
 #endif

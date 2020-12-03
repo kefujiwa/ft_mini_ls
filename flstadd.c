@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 17:05:50 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/03 19:28:32 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/03 22:01:19 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ static int	max(int num1, int num2)
 		return (num2);
 }
 
-static int	do_add(t_flst **lst, t_flst *new, t_flst *tmp, t_flst *prev)
+static void	do_add(t_flst **lst, t_flst *new, t_flst *tmp, t_flst *prev)
 {
 	new->next = tmp;
 	if (prev)
 		prev->next = new;
 	else
 		*lst = new;
-	return (0);
 }
 
 static int	flst_cmp(t_flst **lst, t_flst *new, t_flst *tmp, t_flst *prev)
@@ -35,19 +34,21 @@ static int	flst_cmp(t_flst **lst, t_flst *new, t_flst *tmp, t_flst *prev)
 	int	len;
 
 	if (new->time < tmp->time)
-		return (do_add(lst, new, tmp, prev));
-	else if (new->time == tmp->time)
+		return (1);
+	else if (new->time > tmp->time)
+		return (-1);
+	else if (new->ntime < tmp->ntime)
+		return (1);
+	else if (new->ntime > tmp->ntime)
+		return (-1);
+	else
 	{
-		if (new->inum < tmp->inum)
-			return (do_add(lst, new, tmp, prev));
-		else if (new->inum == tmp->inum)
-		{
-			len = max(ft_strlen(new->name), ft_strlen(tmp->name));
-			if (ft_strncmp(new->name, tmp->name, len + 1) > 0)
-				return (do_add(lst, new, tmp, prev));
-		}
+		len = max(ft_strlen(new->name), ft_strlen(tmp->name));
+		if (ft_strncmp(new->name, tmp->name, len + 1) > 0)
+			return (1);
+		else
+			return (-1);
 	}
-	return (1);
 }
 
 void		flst_add(t_flst **lst, t_flst *new)
@@ -63,8 +64,8 @@ void		flst_add(t_flst **lst, t_flst *new)
 		tmp = *lst;
 		while (tmp)
 		{
-			if (flst_cmp(lst, new, tmp, prev) == 0)
-				return ;
+			if (flst_cmp(lst, new, tmp, prev) == 1)
+				return (do_add(lst, new, tmp, prev));
 			prev = tmp;
 			tmp = tmp->next;
 		}
