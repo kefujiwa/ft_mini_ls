@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 21:04:52 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/04 01:13:57 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:02:40 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int			main(int argc, char *argv[])
 	}
 	dp = opendir(PATH_LS);
 	if (!dp)
-		return (die(PATH_LS));
-	exit = do_ls(PATH_LS, dp);
+		return (die(argv[0]));
+	exit = do_ls(argv[0], dp);
 	closedir(dp);
 	return (exit);
 }

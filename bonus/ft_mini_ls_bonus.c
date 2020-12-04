@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 21:04:52 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/04 14:07:38 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:05:57 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,12 @@ static int	do_ls(char *path, DIR *dp, int flag)
 
 static void	put_error(char *option)
 {
-	ft_putstr_fd("ls: illegal option -- ", STDERR_FILENO);
-	ft_putstr_fd(option, STDERR_FILENO);
-	ft_putstr_fd("\nusage: ls [-G]\n", STDERR_FILENO);
+	ft_putstr_fd("./ft_mini_ls: illegal option -- ", STDERR_FILENO);
+	if (*option == '-')
+		ft_putstr_fd(++option, STDERR_FILENO);
+	else
+		ft_putstr_fd(option, STDERR_FILENO);
+	ft_putstr_fd("\nusage: ./ft_mini_ls [-G]\n", STDERR_FILENO);
 }
 
 int			main(int argc, char *argv[])
@@ -74,8 +77,8 @@ int			main(int argc, char *argv[])
 	}
 	dp = opendir(PATH_LS);
 	if (!dp)
-		return (die(PATH_LS));
-	exit = do_ls(PATH_LS, dp, flag);
+		return (die(argv[0]));
+	exit = do_ls(argv[0], dp, flag);
 	closedir(dp);
 	return (exit);
 }
