@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 21:04:52 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/04 01:54:07 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2020/12/04 14:07:38 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ static int	do_ls(char *path, DIR *dp, int flag)
 	return (0);
 }
 
+static void	put_error(char *option)
+{
+	ft_putstr_fd("ls: illegal option -- ", STDERR_FILENO);
+	ft_putstr_fd(option, STDERR_FILENO);
+	ft_putstr_fd("\nusage: ls [-G]\n", STDERR_FILENO);
+}
+
 int			main(int argc, char *argv[])
 {
 	DIR	*dp;
@@ -57,11 +64,11 @@ int			main(int argc, char *argv[])
 	}
 	else if (argc == 2)
 	{
-		if (!(ft_strncmp(argv[1], "-G", 3)))
+		if (argv[1][0] == '-' && ft_strchr(argv[1], 'G'))
 			flag = 1;
 		else
 		{
-			ft_putstr_fd("ls: illegal option\nusage: ls [-G]\n", STDERR_FILENO);
+			put_error(argv[1]);
 			return (1);
 		}
 	}
