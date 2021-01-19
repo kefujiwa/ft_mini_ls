@@ -6,14 +6,14 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 19:15:07 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/04 01:15:30 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2021/01/20 03:51:18 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _FT_MINI_LS_H
 # define _FT_MINI_LS_H
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
