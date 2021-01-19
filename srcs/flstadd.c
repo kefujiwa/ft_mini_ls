@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 17:05:50 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/03 22:01:19 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2021/01/20 03:39:11 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	do_add(t_flst **lst, t_flst *new, t_flst *tmp, t_flst *prev)
 		*lst = new;
 }
 
-static int	flst_cmp(t_flst **lst, t_flst *new, t_flst *tmp, t_flst *prev)
+static int	flst_cmp(t_flst *new, t_flst *tmp)
 {
 	int	len;
 
@@ -64,7 +64,7 @@ void		flst_add(t_flst **lst, t_flst *new)
 		tmp = *lst;
 		while (tmp)
 		{
-			if (flst_cmp(lst, new, tmp, prev) == 1)
+			if (flst_cmp(new, tmp) == 1)
 				return (do_add(lst, new, tmp, prev));
 			prev = tmp;
 			tmp = tmp->next;
