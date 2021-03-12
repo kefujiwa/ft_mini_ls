@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/01/20 04:26:33 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/03/13 05:02:43 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,13 +57,12 @@ AR					= ar rcs
 RM					= rm -rf
 
 # Directories #
-DIR_HEADERS			= ./includes/
-DIR_SRCS			= ./srcs/
-DIR_OBJS			= ./compiled_srcs/
-DIR_SRCSb			= ./bonus/
-DIR_OBJSb			= ./compiled_bonus/
-DIR_LIBFT			= ./libft/
-DIR_LIBFT_HEADERS	= $(DIR_LIBFT)includes/
+HEADER_DIR			= includes/
+SRCS_DIR			= srcs/
+SRCS_DIRb			= bonus/
+OBJS_DIR			= objs/srcs/
+OBJS_DIRb			= objs/bonus/
+LIBFT_DIR			= libft/
 
 # Files #
 SRCS				= ft_mini_ls.c \
@@ -79,9 +78,9 @@ SRCSb				= ft_mini_ls_bonus.c \
 						flstprint_bonus.c
 
 # Compiled Files #
-OBJS				= $(SRCS:%.c=$(DIR_OBJS)%.o)
-OBJSb				= $(SRCSb:%.c=$(DIR_OBJSb)%.o)
-LIBFT_NAME			= $(DIR_LIBFT)libft.a
+OBJS				= $(SRCS:%.c=$(OBJS_DIR)%.o)
+OBJSb				= $(SRCSb:%.c=$(OBJS_DIRb)%.o)
+LIBFT_NAME			= $(LIBFT_DIR)libft.a
 
 # Executable #
 NAME				= ft_mini_ls
@@ -90,55 +89,59 @@ NAME				= ft_mini_ls
 # **************************************************************************** #
 
 ## RULES ##
-
-# Variables Rules #
-$(NAME):			$(OBJS) $(LIBFT_NAME)
-						@echo "$(_GREEN) All files compiled. $(_END)"
-						$(CC) $(CFLAGS) -I $(DIR_HEADERS) -I $(DIR_LIBFT_HEADERS) $(OBJS) $(LIBFT_NAME) -o $(NAME)
-						@echo "$(_GREEN) Executable '$(NAME)' created. $(_END)"
-
-$(LIBFT_NAME):		FORCE
-						@$(MAKE) -C $(DIR_LIBFT)
-
-FORCE:
-
-# Compiled Source Files #
-$(OBJS):			$(DIR_OBJS)
-$(OBJSb):			$(DIR_OBJSb)
-
-$(DIR_OBJS)%.o: 	$(DIR_SRCS)%.c
-						$(CC) $(CFLAGS) -I $(DIR_HEADERS) -I $(DIR_LIBFT_HEADERS) -c $< -o $@
-$(DIR_OBJSb)%.o: 	$(DIR_SRCSb)%.c
-						$(CC) $(CFLAGS) -I $(DIR_HEADERS) -I $(DIR_LIBFT_HEADERS) -c $< -o $@
-
-$(DIR_OBJS):
-						@mkdir $(DIR_OBJS)
-$(DIR_OBJSb):
-						@mkdir $(DIR_OBJSb)
-
-# Mandatory Part #
+# Main Rules #
 all:				$(NAME)
 
 clean:
-						@$(MAKE) clean -C $(DIR_LIBFT)
-						@$(RM) $(DIR_OBJS) $(DIR_OBJSb)
+						@echo "$(_YELLOW)LIBFT >>$(_END)"
+						@$(MAKE) clean -C $(LIBFT_DIR)
+						@echo "\n$(_BLUE)FT_MINI_LS >>$(_END)"
+						@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
 						@$(RM) $(EXEC)
-						@echo "$(_YELLOW) '$(DIR_OBJS)' '$(DIR_OBJSb)' has been deleted. $(_END)"
+						@echo "$(_RED) '$(OBJS_DIR)' '$(OBJS_DIRb)' has been deleted. $(_END)"
 
 fclean:				clean
-						@$(MAKE) fclean -C $(DIR_LIBFT)
+						@echo "\n$(_YELLOW)LIBFT >>$(_END)"
+						@$(MAKE) fclean -C $(LIBFT_DIR)
+						@echo "\n$(_BLUE)FT_MINI_LS >>$(_END)"
 						@$(RM) $(NAME)
-						@echo "$(_YELLOW) '$(NAME)' has been deleted. $(_END)"
+						@echo "$(_RED) '$(NAME)' has been deleted. $(_END)"
 
 re:					fclean all
 
-# Bonus Part #
-bonus:				$(OBJSb) $(LIBFT_NAME)
-						@echo "$(_GREEN) All files compiled. $(_END)"
-						$(CC) $(CFLAGS) -I $(DIR_HEADERS) -I $(DIR_LIBFT_HEADERS) $(OBJSb) $(LIBFT_NAME) -o $(NAME)
-						@echo "$(_GREEN) Executable '$(NAME)' created. $(_END)"
+# Bonus Rules #
+bonus:				$(LIBFT_NAME) $(OBJSb)
+						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJSb) $(LIBFT_NAME) -o $(NAME)
+						@echo "\n$(_GREEN) Executable '$(NAME)' created. $(_END)"
 
 re_bonus:			fclean bonus
 
+
+# Variables Rules #
+$(NAME):			$(LIBFT_NAME) $(OBJS)
+						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJS) $(LIBFT_NAME) -o $(NAME)
+						@echo "\n$(_GREEN) Executable '$(NAME)' created. $(_END)"
+
+$(LIBFT_NAME):
+						@echo "\n$(_YELLOW)LIBFT >>$(_END)"
+						@$(MAKE) -C $(LIBFT_DIR)
+						@echo "\n$(_BLUE)FT_MINI_LS >>$(_END)"
+
+# Compiled Source Files #
+$(OBJS):			$(OBJS_DIR)
+$(OBJSb):			$(OBJS_DIRb)
+
+$(OBJS_DIR)%.o: 	$(SRCS_DIR)%.c
+						@printf "$(_YELLOW) Compiling ft_mini_ls objects... %s\r$(END)" $@
+						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
+$(OBJS_DIRb)%.o: 	$(SRCS_DIRb)%.c
+						@printf "$(_YELLOW) Compiling ft_mini_ls objects... %s\r$(END)" $@
+						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
+
+$(OBJS_DIR):
+						@mkdir -p $(OBJS_DIR)
+$(OBJS_DIRb):
+						@mkdir -p $(OBJS_DIRb)
+
 # Phony #
-.PHONY:				all clean fclean re bonus re_bonus FORCE
+.PHONY:				all clean fclean re bonus re_bonus
