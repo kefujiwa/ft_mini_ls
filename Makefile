@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/03/13 05:02:43 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/03/13 13:09:46 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,26 +93,23 @@ NAME				= ft_mini_ls
 all:				$(NAME)
 
 clean:
-						@echo "$(_YELLOW)LIBFT >>$(_END)"
-						@$(MAKE) clean -C $(LIBFT_DIR)
-						@echo "\n$(_BLUE)FT_MINI_LS >>$(_END)"
-						@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
-						@$(RM) $(EXEC)
-						@echo "$(_RED) '$(OBJS_DIR)' '$(OBJS_DIRb)' has been deleted. $(_END)"
+					@$(MAKE) clean -C $(LIBFT_DIR)
+					@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
+					@echo "$(_YELLOW)ft_mini_ls objects has been deleted.$(_END)"
 
-fclean:				clean
-						@echo "\n$(_YELLOW)LIBFT >>$(_END)"
-						@$(MAKE) fclean -C $(LIBFT_DIR)
-						@echo "\n$(_BLUE)FT_MINI_LS >>$(_END)"
-						@$(RM) $(NAME)
-						@echo "$(_RED) '$(NAME)' has been deleted. $(_END)"
+fclean:
+					@$(MAKE) fclean -C $(LIBFT_DIR)
+					@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
+					@echo "$(_YELLOW)ft_mini_ls objects has been deleted.$(_END)"
+					@$(RM) $(NAME)
+					@echo "$(_YELLOW)Executable '$(NAME)' has been deleted.$(_END)"
 
 re:					fclean all
 
 # Bonus Rules #
 bonus:				$(LIBFT_NAME) $(OBJSb)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJSb) $(LIBFT_NAME) -o $(NAME)
-						@echo "\n$(_GREEN) Executable '$(NAME)' created. $(_END)"
+						@echo "\n$(_GREEN)Executable '$(NAME)' created.$(_END)"
 
 re_bonus:			fclean bonus
 
@@ -120,28 +117,26 @@ re_bonus:			fclean bonus
 # Variables Rules #
 $(NAME):			$(LIBFT_NAME) $(OBJS)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJS) $(LIBFT_NAME) -o $(NAME)
-						@echo "\n$(_GREEN) Executable '$(NAME)' created. $(_END)"
+						@echo "\n$(_GREEN)Executable '$(NAME)' created. $(_END)"
 
 $(LIBFT_NAME):
-						@echo "\n$(_YELLOW)LIBFT >>$(_END)"
-						@$(MAKE) -C $(LIBFT_DIR)
-						@echo "\n$(_BLUE)FT_MINI_LS >>$(_END)"
+					@$(MAKE) -C $(LIBFT_DIR)
 
 # Compiled Source Files #
 $(OBJS):			$(OBJS_DIR)
 $(OBJSb):			$(OBJS_DIRb)
 
 $(OBJS_DIR)%.o: 	$(SRCS_DIR)%.c
-						@printf "$(_YELLOW) Compiling ft_mini_ls objects... %s\r$(END)" $@
+						@printf "Generating ft_mini_ls objects... %s\r" $@
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 $(OBJS_DIRb)%.o: 	$(SRCS_DIRb)%.c
-						@printf "$(_YELLOW) Compiling ft_mini_ls objects... %s\r$(END)" $@
+						@printf "Generating ft_mini_ls objects... %s\r" $@
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 
 $(OBJS_DIR):
-						@mkdir -p $(OBJS_DIR)
+					@mkdir -p $(OBJS_DIR)
 $(OBJS_DIRb):
-						@mkdir -p $(OBJS_DIRb)
+					@mkdir -p $(OBJS_DIRb)
 
 # Phony #
 .PHONY:				all clean fclean re bonus re_bonus
