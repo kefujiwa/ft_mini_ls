@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/03/13 13:09:46 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/03/14 22:02:07 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,43 +94,44 @@ all:				$(NAME)
 
 clean:
 					@$(MAKE) clean -C $(LIBFT_DIR)
+					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_END)"
 					@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
-					@echo "$(_YELLOW)ft_mini_ls objects has been deleted.$(_END)"
 
 fclean:
 					@$(MAKE) fclean -C $(LIBFT_DIR)
+					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_END)"
 					@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
-					@echo "$(_YELLOW)ft_mini_ls objects has been deleted.$(_END)"
+					@echo "$(_RED)Deleting executable '$(NAME)'...\n$(_END)"
 					@$(RM) $(NAME)
-					@echo "$(_YELLOW)Executable '$(NAME)' has been deleted.$(_END)"
 
 re:					fclean all
 
 # Bonus Rules #
-bonus:				$(LIBFT_NAME) $(OBJSb)
+bonus:				fclean $(LIBFT_NAME) $(OBJSb)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJSb) $(LIBFT_NAME) -o $(NAME)
-						@echo "\n$(_GREEN)Executable '$(NAME)' created.$(_END)"
-
-re_bonus:			fclean bonus
-
+						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_END)"
+						@echo "Try \"./ft_mini_ls\"."
 
 # Variables Rules #
 $(NAME):			$(LIBFT_NAME) $(OBJS)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJS) $(LIBFT_NAME) -o $(NAME)
-						@echo "\n$(_GREEN)Executable '$(NAME)' created. $(_END)"
+						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_END)"
+						@echo "Try \"./ft_mini_ls\"."
 
-$(LIBFT_NAME):
+$(LIBFT_NAME):		FORCE
 					@$(MAKE) -C $(LIBFT_DIR)
+
+FORCE:
 
 # Compiled Source Files #
 $(OBJS):			$(OBJS_DIR)
 $(OBJSb):			$(OBJS_DIRb)
 
 $(OBJS_DIR)%.o: 	$(SRCS_DIR)%.c
-						@printf "Generating ft_mini_ls objects... %s\r" $@
+						@printf "$(_YELLOW)Generating ft_mini_ls objects... %-33.33s\r$(_END)" $@
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 $(OBJS_DIRb)%.o: 	$(SRCS_DIRb)%.c
-						@printf "Generating ft_mini_ls objects... %s\r" $@
+						@printf "$(_YELLOW)Generating ft_mini_ls objects... %-33.33s\r$(_END)" $@
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 
 $(OBJS_DIR):
@@ -139,4 +140,4 @@ $(OBJS_DIRb):
 					@mkdir -p $(OBJS_DIRb)
 
 # Phony #
-.PHONY:				all clean fclean re bonus re_bonus
+.PHONY:				all clean fclean re bonus re_bonus FORCE
