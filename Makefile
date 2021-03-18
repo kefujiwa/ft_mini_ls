@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/03/14 22:02:07 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/03/18 21:28:07 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,13 +110,13 @@ re:					fclean all
 bonus:				fclean $(LIBFT_NAME) $(OBJSb)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJSb) $(LIBFT_NAME) -o $(NAME)
 						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_END)"
-						@echo "Try \"./ft_mini_ls\"."
+						@echo "$(_BLUE)Try \"./ft_mini_ls\".$(END)"
 
 # Variables Rules #
 $(NAME):			$(LIBFT_NAME) $(OBJS)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJS) $(LIBFT_NAME) -o $(NAME)
 						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_END)"
-						@echo "Try \"./ft_mini_ls\"."
+						@echo "$(_BLUE)Try \"./ft_mini_ls\".$(END)"
 
 $(LIBFT_NAME):		FORCE
 					@$(MAKE) -C $(LIBFT_DIR)
