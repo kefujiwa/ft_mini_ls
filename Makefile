@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/03/18 21:28:07 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/03/18 21:59:20 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,12 +95,12 @@ all:				$(NAME)
 clean:
 					@$(MAKE) clean -C $(LIBFT_DIR)
 					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_END)"
-					@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
+					@$(RM) objs/
 
 fclean:
 					@$(MAKE) fclean -C $(LIBFT_DIR)
 					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_END)"
-					@$(RM) $(OBJS_DIR) $(OBJS_DIRb)
+					@$(RM) objs/
 					@echo "$(_RED)Deleting executable '$(NAME)'...\n$(_END)"
 					@$(RM) $(NAME)
 
