@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/03/23 01:37:41 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/03/23 02:03:02 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 ## COLORS ##
 
 # Formats #
-_END				= \x1b[0m
+_RESET				= \x1b[0m
 _BOLD				= \x1b[1m
 _DIM				= \x1b[2m
 _UNDER				= \x1b[4m
@@ -95,14 +95,14 @@ all:				$(NAME)
 
 clean:
 					@$(MAKE) clean -C $(LIBFT_DIR)
-					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_END)"
+					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_RESET)"
 					@$(RM) objs/
 
 fclean:
 					@$(MAKE) fclean -C $(LIBFT_DIR)
-					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_END)"
+					@echo "$(_RED)Cleaning ft_mini_ls objects...\n$(_RESET)"
 					@$(RM) objs/
-					@echo "$(_RED)Deleting executable '$(NAME)'...\n$(_END)"
+					@echo "$(_RED)Deleting executable '$(NAME)'...\n$(_RESET)"
 					@$(RM) $(NAME)
 
 re:					fclean all
@@ -110,13 +110,13 @@ re:					fclean all
 # Bonus Rules #
 bonus:				fclean $(LIBFT_NAME) $(OBJSb)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJSb) $(LIBFT_NAME) -o $(NAME)
-						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_END)"
+						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_RESET)"
 						@echo "$(_BLUE)Try \"./ft_mini_ls\".$(END)"
 
-# Variables Rules #
+# Variable Rules #
 $(NAME):			$(LIBFT_NAME) $(OBJS)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJS) $(LIBFT_NAME) -o $(NAME)
-						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_END)"
+						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_RESET)"
 						@echo "$(_BLUE)Try \"./ft_mini_ls\".$(END)"
 
 $(LIBFT_NAME):		FORCE
@@ -129,10 +129,10 @@ $(OBJS):			$(OBJS_DIR)
 $(OBJSb):			$(OBJS_DIRb)
 
 $(OBJS_DIR)%.o: 	$(SRCS_DIR)%.c
-						@printf "$(_YELLOW)Generating ft_mini_ls objects... %-33.33s\r$(_END)" $@
+						@printf "$(_YELLOW)Generating ft_mini_ls objects... %-33.33s\r$(_RESET)" $@
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 $(OBJS_DIRb)%.o: 	$(SRCS_DIRb)%.c
-						@printf "$(_YELLOW)Generating ft_mini_ls objects... %-33.33s\r$(_END)" $@
+						@printf "$(_YELLOW)Generating ft_mini_ls objects... %-33.33s\r$(_RESET)" $@
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
 
 $(OBJS_DIR):
