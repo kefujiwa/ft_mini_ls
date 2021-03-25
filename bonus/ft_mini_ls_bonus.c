@@ -6,7 +6,7 @@
 /*   By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 21:04:52 by kefujiwa          #+#    #+#             */
-/*   Updated: 2020/12/04 20:05:57 by kefujiwa         ###   ########.fr       */
+/*   Updated: 2021/03/26 02:01:00 by kefujiwa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int			main(int argc, char *argv[])
 
 	if (argc > 2)
 	{
-		ft_putstr_fd("./ft_mini_ls: One argument available\n", STDERR_FILENO);
+		ft_putstr_fd("./ft_mini_ls: Invalid argument\n", STDERR_FILENO);
 		return (1);
 	}
 	else if (argc == 2)
