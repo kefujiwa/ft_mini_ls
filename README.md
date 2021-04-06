@@ -5,7 +5,7 @@ ft_mini_ls is a remake of the ls program.
 ## Getting Started
 
 ```
-git clone https://github.com/kefujiwa/ft_mini_ls.git
+git clone --recurse-submodules https://github.com/kefujiwa/ft_mini_ls.git
 cd ft_mini_ls
 make all / make bonus
 ```
