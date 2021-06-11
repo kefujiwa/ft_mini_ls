@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/06/11 17:35:44 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/06/11 18:00:27 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,6 @@ LIBFT_NAME			= $(LIBFT_DIR)libft.a
 
 # Executable #
 NAME				= ft_mini_ls
-NAMEb				= ft_mini_ls
 
 
 # **************************************************************************** #
