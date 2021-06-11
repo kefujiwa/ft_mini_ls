@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/03/23 02:03:02 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/06/11 17:35:44 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ LIBFT_NAME			= $(LIBFT_DIR)libft.a
 
 # Executable #
 NAME				= ft_mini_ls
+NAMEb				= ft_mini_ls
 
 
 # **************************************************************************** #
@@ -108,26 +109,21 @@ fclean:
 re:					fclean all
 
 # Bonus Rules #
-bonus:				fclean $(LIBFT_NAME) $(OBJSb)
+bonus:				fclean $(LIBFT_NAME) $(OBJS_DIRb) $(OBJSb)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJSb) $(LIBFT_NAME) -o $(NAME)
 						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_RESET)"
 						@echo "$(_BLUE)Try \"./ft_mini_ls\".$(END)"
 
 # Variable Rules #
-$(NAME):			$(LIBFT_NAME) $(OBJS)
+$(NAME):			$(LIBFT_NAME) $(OBJS_DIR) $(OBJS)
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) $(OBJS) $(LIBFT_NAME) -o $(NAME)
 						@echo "\n\n$(_GREEN)Executable '$(NAME)' created.\n$(_RESET)"
 						@echo "$(_BLUE)Try \"./ft_mini_ls\".$(END)"
 
-$(LIBFT_NAME):		FORCE
+$(LIBFT_NAME):
 					@$(MAKE) -C $(LIBFT_DIR)
 
-FORCE:
-
 # Compiled Source Files #
-$(OBJS):			$(OBJS_DIR)
-$(OBJSb):			$(OBJS_DIRb)
-
 $(OBJS_DIR)%.o: 	$(SRCS_DIR)%.c
 						@printf "$(_YELLOW)Generating ft_mini_ls objects... %-33.33s\r$(_RESET)" $@
 						@$(CC) $(CFLAGS) -I $(HEADER_DIR) -c $< -o $@
