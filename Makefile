@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/02 18:41:00 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/06/11 18:00:27 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/06/27 14:53:55 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,4 +136,4 @@ $(OBJS_DIRb):
 					@mkdir -p $(OBJS_DIRb)
 
 # Phony #
-.PHONY:				all clean fclean re bonus re_bonus FORCE
+.PHONY:				all clean fclean re bonus re_bonus
